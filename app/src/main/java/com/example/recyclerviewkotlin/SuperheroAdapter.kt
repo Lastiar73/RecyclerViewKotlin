@@ -9,9 +9,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class SuperheroAdapter(private val context: Context, private val superhero: List<Superhero>, val listener: (Superhero) -> Unit)
-    : RecyclerView.Adapter<SuperheroAdapter.SuperheroViewHolder>(){
+    : RecyclerView.Adapter<SuperheroAdapter.SuperheroViewHolder>() {
 
-    class SuperheroViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    class SuperheroViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         val imgSuperhero = view.findViewById<ImageView>(R.id.img_item_photo)
         val nameSuperhero = view.findViewById<TextView>(R.id.tv_item_name)
@@ -22,9 +22,11 @@ class SuperheroAdapter(private val context: Context, private val superhero: List
             imgSuperhero.setImageResource(superhero.imgSuperhero)
             nameSuperhero.text = superhero.nameSuperhero
             descSuperhero.text = superhero.descSuperhero
+            itemView.setOnClickListener (listener(superhero))
 
         }
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SuperheroViewHolder {
         return SuperheroViewHolder(
@@ -37,4 +39,8 @@ class SuperheroAdapter(private val context: Context, private val superhero: List
     }
             override fun getItemCount(): Int = superhero.size
         }
+
+private fun View.setOnClickListener(listener: Unit) {
+
+}
 

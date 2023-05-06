@@ -1,5 +1,6 @@
 package com.example.recyclerviewkotlin
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Parcel
@@ -7,7 +8,12 @@ import android.os.Parcelable
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class MainActivity() : AppCompatActivity(), Parcelable {
+class MainActivity() : AppCompatActivity() {
+
+    companion object {
+        val INTENT_PARCELABLE = "OBJECT_INTENT"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -73,6 +79,9 @@ class MainActivity() : AppCompatActivity(), Parcelable {
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = SuperheroAdapter(this, superheroList){
+            val intent = Intent (this, DetailSuperheroActivity::class.java)
+            intent.putExtra(INTENT_PARCELABLE, it)
+            startActivity(intent)
 
         }
     }
@@ -91,11 +100,11 @@ class MainActivity() : AppCompatActivity(), Parcelable {
 
 }
 
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
+    fun writeToParcel(parcel: Parcel, flags: Int) {
 
     }
 
-    override fun describeContents(): Int {
+    fun describeContents(): Int {
         return 0
     }
 
